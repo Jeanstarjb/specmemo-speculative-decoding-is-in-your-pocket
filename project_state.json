@@ -1,0 +1,84 @@
+{
+  "paper_title": "SpecMemo: Speculative Decoding is in Your Pocket",
+  "paper_url": "https://arxiv.org/pdf/2506.01986v1",
+  "societal_problem": "The inability to efficiently deploy large language models (LLMs) on memory-constrained devices, such as mobile GPUs or small server GPUs, limits access to advanced AI applications in resource-constrained environments, hindering democratized AI adoption.",
+  "solution_architecture": "The solution involves developing a device-aware inference engine, SpecMemo, which uses speculative decoding optimized for memory-constrained devices. The architecture includes a backend for memory-efficient speculative decoding, a distributed processing layer for multi-GPU setups, and a frontend API for seamless integration. The tech stack includes Python, PyTorch for LLM inference, CUDA for GPU optimization, FastAPI for API development, Docker for containerization, and Kubernetes for multi-GPU orchestration.",
+  "status": "in_progress",
+  "tasks": [
+    {
+      "id": 1,
+      "description": "Set up the project repository with basic configurations, including Python environment, dependencies, and Dockerfile for containerization.",
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "description": "Implement the core memory modeling algorithm to calculate the lower bound of memory allocation required for speculative decoding.",
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "description": "Develop the speculative decoding logic to generate candidate tokens and manage acceptance/rejection efficiently.",
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "description": "Implement memory management features to minimize redundant memory allocations for rejected candidate tokens.",
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "description": "Design and implement a distributed processing layer to enable batched speculative decoding across multiple GPUs.",
+      "status": "pending"
+    },
+    {
+      "id": 6,
+      "description": "Integrate Llama-2-70B-Chat model and optimize it for distributed speculative decoding on small server GPUs.",
+      "status": "pending"
+    },
+    {
+      "id": 7,
+      "description": "Develop an API using FastAPI to expose SpecMemo's capabilities for multi-turn chatbot applications.",
+      "status": "pending"
+    },
+    {
+      "id": 8,
+      "description": "Implement unit tests for the memory modeling algorithm and speculative decoding logic.",
+      "status": "pending"
+    },
+    {
+      "id": 9,
+      "description": "Set up CI/CD pipelines for automated testing, building, and deployment of the application.",
+      "status": "pending"
+    },
+    {
+      "id": 10,
+      "description": "Develop a monitoring and logging system to track memory usage, throughput, and error rates during inference.",
+      "status": "pending"
+    },
+    {
+      "id": 11,
+      "description": "Optimize CUDA kernels for GPU memory management and speculative decoding performance.",
+      "status": "pending"
+    },
+    {
+      "id": 12,
+      "description": "Conduct performance benchmarking to validate memory savings, throughput improvements, and speedup gains on various GPU configurations.",
+      "status": "pending"
+    },
+    {
+      "id": 13,
+      "description": "Write comprehensive documentation for developers and users, including API usage, deployment instructions, and troubleshooting guides.",
+      "status": "pending"
+    },
+    {
+      "id": 14,
+      "description": "Containerize the application using Docker and deploy it on a Kubernetes cluster for multi-GPU orchestration.",
+      "status": "pending"
+    },
+    {
+      "id": 15,
+      "description": "Prepare a demo application showcasing SpecMemo's multi-turn chatbot capabilities on memory-constrained devices.",
+      "status": "pending"
+    }
+  ]
+}
