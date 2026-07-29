@@ -13,7 +13,7 @@
     {
       "id": 2,
       "description": "Implement the core memory modeling algorithm to calculate the lower bound of memory allocation required for speculative decoding.",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 3,
