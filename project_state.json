@@ -8,7 +8,7 @@
     {
       "id": 1,
       "description": "Set up the project repository with basic configurations, including Python environment, dependencies, and Dockerfile for containerization.",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 2,
