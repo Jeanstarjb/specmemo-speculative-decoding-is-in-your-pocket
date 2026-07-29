@@ -11,3 +11,4 @@ The solution involves developing a device-aware inference engine, SpecMemo, whic
 ## Progress Log
 
 - **Completed Task:** Set up the project repository with basic configurations, including Python environment, dependencies, and Dockerfile for containerization.
+- **Completed Task:** Implement the core memory modeling algorithm to calculate the lower bound of memory allocation required for speculative decoding.
