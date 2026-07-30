@@ -28,7 +28,7 @@
     {
       "id": 5,
       "description": "Design and implement a distributed processing layer to enable batched speculative decoding across multiple GPUs.",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 6,
