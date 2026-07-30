@@ -14,3 +14,4 @@ The solution involves developing a device-aware inference engine, SpecMemo, whic
 - **Completed Task:** Implement the core memory modeling algorithm to calculate the lower bound of memory allocation required for speculative decoding.
 - **Completed Task:** Develop the speculative decoding logic to generate candidate tokens and manage acceptance/rejection efficiently.
 - **Completed Task:** Implement memory management features to minimize redundant memory allocations for rejected candidate tokens.
+- **Completed Task:** Design and implement a distributed processing layer to enable batched speculative decoding across multiple GPUs.
