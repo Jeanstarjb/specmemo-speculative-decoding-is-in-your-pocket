@@ -23,7 +23,7 @@
     {
       "id": 4,
       "description": "Implement memory management features to minimize redundant memory allocations for rejected candidate tokens.",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 5,
