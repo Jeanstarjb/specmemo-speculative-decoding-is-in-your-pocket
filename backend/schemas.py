@@ -20,12 +20,12 @@ class MemoryResponse(BaseModel):
     activation_memory_gb: float
 
 class GenerationRequest(BaseModel):
-    prompt: str
+    prompts: List[str]
     max_tokens: int = 50
     temperature: float = 0.7
     top_p: float = 0.9
-    max_draft_tokens: Optional[int] = None
+    max_speculative_steps: int = 5
+    early_stop: bool = True
 
 class GenerationResponse(BaseModel):
-    generated_text: str
-    tokens_accepted: int
+    generated_texts: List[str]
