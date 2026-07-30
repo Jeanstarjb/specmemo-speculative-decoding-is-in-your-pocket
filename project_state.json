@@ -18,7 +18,7 @@
     {
       "id": 3,
       "description": "Develop the speculative decoding logic to generate candidate tokens and manage acceptance/rejection efficiently.",
-      "status": "pending"
+      "status": "completed"
     },
     {
       "id": 4,
