@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from typing import List
 
 class ModelConfig(BaseModel):
     num_parameters: int
@@ -17,3 +18,14 @@ class MemoryResponse(BaseModel):
     memory_lower_bound_gb: float
     parameter_memory_gb: float
     activation_memory_gb: float
+
+class GenerationRequest(BaseModel):
+    prompt: str
+    max_tokens: int = 50
+    temperature: float = 0.7
+    top_p: float = 0.9
+    max_draft_tokens: Optional[int] = None
+
+class GenerationResponse(BaseModel):
+    generated_text: str
+    tokens_accepted: int
