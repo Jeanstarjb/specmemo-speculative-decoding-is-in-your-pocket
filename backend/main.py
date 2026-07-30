@@ -1,12 +1,12 @@
 from fastapi import FastAPI
+import torch
 from .memory_modeling import MemoryModel
 from .schemas import MemoryRequest, MemoryResponse, GenerationRequest, GenerationResponse
 from .speculative_decoding import SpeculativeDecoder
-from typing import Optional
+from .distributed import DistributedSpeculator
 
 app = FastAPI()
 
-# Initialize with placeholder models (to be replaced with actual model loading)
 class DraftModel(torch.nn.Module):
     def init_cache(self, batch_size, seq_length):
         return None
@@ -21,34 +21,28 @@ class TargetModel(torch.nn.Module):
     def forward(self, input_ids, cache):
         return torch.randn(input_ids.size(0), 1, 50257), None
 
-decoder = SpeculativeDecoder(
-    draft_model=DraftModel(),
-    target_model=TargetModel(),
-    max_draft_tokens=3
-)
+num_gpus = torch.cuda.device_count()
+draft_model = DraftModel()
+target_model = TargetModel()
+spec_decoder = DistributedSpeculator(draft_model, target_model) if num_gpus > 1 \
+    else SpeculativeDecoder(draft_model, target_model)
 
-@app.post('/api/calculate-memory', response_model=MemoryResponse)
-async def calculate_memory(req: MemoryRequest):
-    calculator = MemoryModel(
-        draft_config=req.draft_config.dict(),
-        target_config=req.target_config.dict()
+@app.post("/memory-estimate", response_model=MemoryResponse)
+async def estimate_memory(request: MemoryRequest):
+    calculator = MemoryModel(request.draft_config.dict(), request.target_config.dict())
+    mem_info = calculator.calculate_memory_lower_bound(
+        request.batch_size,
+        request.sequence_length,
+        request.dtype_bytes
     )
-    result = calculator.calculate_memory_lower_bound(
-        req.batch_size,
-        req.sequence_length,
-        req.dtype_bytes
-    )
-    return {
-        'memory_lower_bound_gb': result['total'],
-        'parameter_memory_gb': result['parameters'],
-        'activation_memory_gb': result['activations']
-    }
+    return MemoryResponse(**mem_info)
 
-@app.post('/api/generate', response_model=GenerationResponse)
-async def generate_text(req: GenerationRequest):
-    input_ids = torch.tensor([req.prompt]).to(decoder.device)
-    output_ids = decoder.decode(input_ids, max_tokens=req.max_tokens)
-    return {
-        'generated_text': 'Generated text placeholder',
-        'tokens_accepted': output_ids.size(1) - input_ids.size(1)
-    }
+@app.post("/generate", response_model=GenerationResponse)
+async def generate_text(request: GenerationRequest):
+    generated = spec_decoder.generate(
+        request.prompts,
+        max_tokens=request.max_tokens,
+        temperature=request.temperature,
+        top_p=request.top_p
+    )
+    return GenerationResponse(generated_texts=generated)
